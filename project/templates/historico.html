@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %} - Histórico de Frequencia {% endblock %}
+
+{% block content %}
+    <section class="section">
+        <div class="columns is-flex is-align-items-center">
+            <div class="column container is-centered is-three-fifths is-align-self-center card p-0">
+                <div class="card-header has-background-info">
+                    <h2 class="has-text-grey-dark has-text-weight-semibold mt-0 ml-0 mr-0 p-2">
+                        Histórico de Frequencia
+                    </h2>
+                </div>
+                <div class="card-content">
+                    <div class="select">
+                        <label for="turma"></label>
+                        <select name="turma" id="turma" onchange="buscaFrequencia()">
+                            <option value="0">Selecione uma turma</option>
+                            {% for turma in turmas %}
+                                <option value="{{ turma.id }}"
+                                        {% if turma.id == turma_id %} selected {% endif %}>{{ turma.turma }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="select">
+                        <label for="dia_letivo"></label>
+                        <select name="dia_letivo" id="dia_letivo" onchange="buscaFrequencia()">
+                            <option value="0">Selecione o dia letivo</option>
+                            {% for dia in dias_letivos %}
+                                <option value="{{ dia.id }}"
+                                        {% if dia.id == dia_id %}
+                                        selected {% endif %}>{{ dia.dia }}/{{ dia.mes }}/{{ dia.ano }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="columns is-flex is-align-items-center">
+            <div class="column container is-centered is-three-fifths is-align-self-center card p-0">
+                <div class="card-header has-background-info">
+                    <h2 class="has-text-grey-dark has-text-weight-semibold mt-0 ml-0 mr-0 p-2">
+                        Frequencia
+                    </h2>
+                </div>
+                <div class="card-content">
+                    <table class="table is-fullwidth is-hoverable">
+                        <thead>
+                        <tr>
+                            <th>Aluno</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for frequencia in lista_presenca %}
+                            <tr>
+                                <td class="has-background-{% if frequencia.presente == 0 %}danger
+                                {% else %}success
+                                {% endif %} is-hoverable">
+                                    {{ frequencia.aluno.nome }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function buscaFrequencia() {
+            let turma = document.getElementById('turma').value;
+            let dia_letivo = document.getElementById('dia_letivo').value;
+            if (turma !== 0 && dia_letivo !== 0) {
+                window.location.href = "/historico/" + turma + "/" + dia_letivo;
+            }
+        }
+    </script>
+{% endblock %}

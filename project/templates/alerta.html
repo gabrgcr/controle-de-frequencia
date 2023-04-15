@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %} - Alertas {% endblock %}
+
+{% block content %}
+    {% for alerta in alertas %}
+        <article class="message {% if alerta.feito_aviso == 0 %} is-danger
+                        {% else %} is-warning {% endif %}
+                         is-rounded">
+            <div class="message-header">
+                <p>Ausência</p>
+                {% if alerta.feito_aviso == 0 %}
+                    <form action="/alerta/check/{{ alerta.fk_aluno }}/{{ alerta.fk_dia_letivo }}" method="POST">
+                        <button class="button is-rounded is-info" aria-hidden="true" title="Marcar como resolvido">
+                            <span class="icon is-small"> <i class="fas fa-check is-small"></i> </span>
+                        </button>
+                    </form>
+                {% endif %}
+            </div>
+            <div class="message-body">
+                <div class="columns is-flex is-vcentered">
+                    <div class="column is-four-fifths">
+                        <p>Aluno: {{ alerta.aluno.nome }}</p>
+                        <p>Turma: {{ alerta.aluno.turma.turma }}</p>
+                        <p>Dia
+                            Letivo: {{ alerta.dia_letivo.dia }}/{{ alerta.dia_letivo.mes }}/{{ alerta.dia_letivo.ano }}</p>
+                        <p>Professor: {{ alerta.usuario.nome }}</p>
+                    </div>
+                    <div class="column is-one-fifth is-flex mr-0">
+                        <form>
+                            <button class="button is-info m-0" formaction="/responsaveis/{{ alerta.aluno.id }}">
+                                Ver Responsáveis
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock %}

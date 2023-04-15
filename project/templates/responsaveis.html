@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %} - Responsaveis{% endblock %}
+
+{% block content %}
+    <section class="section">
+        <div class="columns is-flex is-align-items-center">
+            <div class="column container is-centered is-11 card is-align-self-center card p-0">
+                <div class="card-header has-background-danger-dark">
+                    <h2 class="has-text-grey-lighter has-text-weight-medium mt-0 ml-0 mr-0 p-2">
+                        Responsáveis pelo aluno
+                        <span class="has-text-weight-bold"> {{ aluno.nome }} </span>
+                        da turma
+                        <span class="has-text-weight-bold"> {{ aluno.turma.turma }} </span>
+                    </h2>
+                </div>
+                <div class="card-content">
+                    <div class="columns is-flex-wrap-wrap">
+                        {% for responsavel in responsaveis %}
+                            <div class="column is-bordered is-fullwidth">
+                                <form>
+                                    <p class="is-text"><span
+                                            class="has-text-weight-medium">{{ responsavel.nome }}</span>
+                                        - {{ responsavel.relacao }}
+                                        <button formaction="/responsaveis/delete/{{ responsavel.id }}"
+                                                title="Deletar Responsável" formmethod="post" class="is-rounded">
+                                    <span class="icon is-small has-text-black">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </span>
+                                        </button>
+                                    </p>
+                                </form>
+                                <p class="is-text">{{ responsavel.endereco }}</p>
+                                <p class="is-text">{{ responsavel.telefone }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card-header has-background-danger-dark">
+                    <h2 class="has-text-grey-lighter has-text-weight-semibold mt-0 ml-0 mr-0 p-2">
+                        Cadastrar novos responsáveis
+                    </h2>
+                </div>
+                <div class="card-content">
+                    <form method="post" action="/responsaveis/{{ aluno.id }}">
+                        <div class="columns is-flex-wrap-wrap">
+                            <div class="column is-8">
+                                <label class="label" for="nome">Nome</label>
+                                <input class="input"
+                                       name="nome"
+                                       id="nome"
+                                       placeholder="Nome do Responsável">
+                            </div>
+                            <div class="column is-4">
+                                <label class="label" for="relacao">Relação</label>
+                                <input class="input"
+                                       name="relacao"
+                                       id="relacao"
+                                       placeholder="Relação">
+                            </div>
+                            <div class="column is-9">
+                                <label class="label" for="endereco">Endereço</label>
+                                <input
+                                        class="input" name="endereco"
+                                        id="endereco" placeholder="Endereço">
+                            </div>
+                            <div class="column is-3">
+                                <label class="label" for="telefone">Telefone</label>
+                                <input
+                                        class="input" name="telefone"
+                                        id="telefone"
+                                        placeholder="(99) 99999-9999" maxlength="15">
+                            </div>
+                            <div class="column is-2">
+                                <button class="button is-success is-fullwidth">Cadastrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

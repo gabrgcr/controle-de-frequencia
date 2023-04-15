@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %} - Turmas {% endblock %}
+{% block content %}
+    <table class="table is-centered container is-bordered is-hoverable card">
+        <thead>
+        <tr class="is-vcentered">
+            <th class="is-vcentered">Turma</th>
+            <th class="is-vcentered">Ano Letivo</th>
+            <th>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for turma in turmas %}
+            <tr>
+                <td class="is-vcentered">{{ turma.turma }}</td>
+                <td class="is-vcentered">{{ turma.ano_letivo }}</td>
+                <td>
+                    <form action="/turma/delete/{{ turma.id }}" method="POST">
+                        <button class="button is-danger" hidden disabled>
+                        <span class="icon">
+                            <i class="fa-solid fa-trash"></i>
+                        </span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <form action="/turma/save/" method="POST">
+                <td>
+                    <input class="input"
+                           maxlength="2"
+                           size="2"
+                           autocapitalize="on"
+                           name="nome_turma"
+                           id="nome_turma"
+                           style="text-transform:uppercase;"
+                           pattern="^\d[a-zA-Z]$"
+                           placeholder="9A"
+                           />
+                </td>
+                <td>
+                    <input class="input number" maxlength="4" size="4" name="ano_letivo" id="ano_letivo"
+                           placeholder="2023"
+                           min="2022" max="2050" pattern="^\d{4}$"/></td>
+                <td>
+                    <button class="button is-success" formmethod="POST">
+                <span class="icon">
+                    <i class="fa-solid fa-plus"></i>
+                </span>
+                    </button>
+                </td>
+            </form>
+        </tr>
+        </tfoot>
+    </table>
+{% endblock %}

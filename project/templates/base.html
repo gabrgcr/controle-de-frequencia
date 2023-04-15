@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Controle de Frequencia {% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://kit.fontawesome.com/09a6fa3f09.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<header class="has-background-success p-5">
+    <h1 class="title">Controle de Frequência</h1>
+</header>
+<div class="columns is-fullheight is-flex-grow p-0 m-0 is-flex" style="min-height: 100vh">
+    <div class="column is-one-fifth has-background-grey-lighter">
+        <aside class="menu m-3">
+            <p class="menu-label">
+                Geral
+            </p>
+            <ul class="menu-list">
+                <li><a href="/alerta">Avisos</a></li>
+                <li><a href="/alunos">Alunos</a></li>
+                <li><a href="/turma">Turmas</a></li>
+                <li><a href="/frequencia/0">Frequência</a></li>
+                <li><a href="/historico/0/0">Histórico de Frequência</a></li>
+            </ul>
+            <p class="menu-label">
+                Administração
+            </p>
+            <ul class="menu-list">
+                {% if current_user.tipo_usuario == 'ADM' %}
+                    <li><a href="/usuarios">Usuários</a></li>
+                {% endif %}
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </aside>
+    </div>
+    <div class="column is-four-fifths m-3 p-5">
+        {% block content %} {% endblock %}
+    </div>
+</div>
+<footer class="footer has-background-success">
+    <div class="content has-text-centered">
+        <p>
+            <strong>Controle de Frequência</strong> apresentado para a disciplina de PI I do Eixo Computação da
+            <a href="https://univesp.br/" target="_blank">UNIVESP</a>.
+        </p>
+    </div>
+</footer>
+</body>
+</html>

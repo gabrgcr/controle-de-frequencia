@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %} - Usuários {% endblock %}
+
+{% block content %}
+    <section class="section">
+        <div class="columns is-flex is-align-items-center">
+            <div class="column container is-centered is-three-fifths is-align-self-center card p-0">
+                <div class="card-header has-background-warning">
+                    <h2 class="has-text-grey-dark has-text-weight-semibold mt-0 ml-0 mr-0 p-2">
+                        Criação de Usuário
+                    </h2>
+                </div>
+                <div class="card-content">
+                    <form method="post" action="/usuarios">
+                        <div class="field">
+                            <label class="label">Nome Completo
+                                <input class="input" type="text" name="nome" id="nome" placeholder="Nome">
+                            </label>
+                        </div>
+                        <div class="field">
+                            <label class="label" for="username">Usuário
+                                <input class="input" type="text" name="username" id="username" placeholder="Usuário">
+                            </label>
+                        </div>
+                        <div class="field">
+                            <label class="label">Senha
+                                <input class="input" type="password" name="senha" id="senha" placeholder="Senha">
+                            </label>
+                        </div>
+                        <div class="field">
+                            <label class="label">Confirmar Senha
+                                <input class="input" type="password" name="confirmar_senha" id="confirmar_senha" placeholder="Confirmar Senha">
+                            </label>
+                        </div>
+                        <div class="field select">
+                            <div class="select">
+                                <label>
+                                    <select name="tipo_usuario" id="tipo_usuario">
+                                        <option value="PROF">Professor</option>
+                                        <option value="ADM">Administrador</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-link" formmethod="post">Criar</button>
+                            </div>
+                            <div class="control">
+                                <button class="button is-link is-light" formmethod="get">
+                                    Cancelar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

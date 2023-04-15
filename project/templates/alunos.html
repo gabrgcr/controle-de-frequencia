@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %} - Alunos {% endblock %}
+{% block content %}
+    <section class="section">
+        <div class="columns is-flex is-align-items-center">
+            <div class="column container is-centered is-three-fifths is-align-self-center card p-0">
+                <div class="card-header has-background-grey-lighter"><h2
+                        class="has-text-grey-dark has-text-weight-semibold mt-0 ml-0 mr-0 p-2">
+                    Adicionar Aluno</h2></div>
+                <div class="card-content">
+                    <form method="post" action="/alunos">
+                        <div class="block">
+                            <label class="label has-text-weight-medium is-vcentered" for="nome">Nome</label>
+                            <input class="input" name="nome" id="nome" placeholder="Nome do Aluno">
+                        </div>
+                        <div class="block">
+                            <label class="label has-text-weight-medium is-vcentered" for="turma">Turma</label>
+                            <div class="columns is-flex">
+                                <div class="column is-one-fifth is-align-items-flex-start">
+                                    <div class="select">
+                                        <select name="id_turma" id="id_turma">
+                                            {% for turma in turmas %}
+                                                <option value="{{ turma.id }}">{{ turma.turma }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="column is-four-fifths is-justify-content-flex-end">
+                                    <button class="button is-success" formmethod="post">Salvar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="columns is-flex is-align-items-center">
+            <div class="column container is-centered is-10 card is-align-self-center card p-0">
+                <div class="card-header has-background-grey-lighter">
+                    <h2 class="has-text-grey-dark has-text-weight-semibold mt-0 ml-0 mr-0 p-2">
+                        Lista de Alunos
+                    </h2>
+                </div>
+                <div class="card-content">
+                    <table class="table is-centered container is-bordered is-hoverable is-fullwidth">
+                        <thead>
+                        <tr>
+                            <th>Aluno</th>
+                            <th>Turma</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for aluno in alunos %}
+                            <tr>
+                                <td><a href="responsaveis/{{ aluno.id }}"> {{ aluno.nome }}</a></td>
+                                <td>{{ aluno.turma.turma }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

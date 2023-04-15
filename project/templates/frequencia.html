@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %} - Frequencia em {{ dia_letivo.dia }}/{{ dia_letivo.mes }}/{{ dia_letivo.ano }} {% endblock %}
+
+{% block content %}
+    <section class="section">
+        <div class="columns is-flex">
+            <div class="column container is-centered is-12 is-align-self-center p-0">
+                {% if dia_letivo == None %}
+                    <form>
+                        <button class="button is-warning" formaction="/dia_letivo/abrir" formmethod="post">Iniciar Dia
+                            Letivo
+                        </button>
+                    </form>
+                {% else %}<h1 class="title is-centered has-text-grey-dark">Frequencia para o
+                    dia {{ dia_letivo.dia }}/{{ dia_letivo.mes }}/{{ dia_letivo.ano }}</h1>
+                {% endif %}
+                {% if dia_letivo != None %}
+                    <br>
+                    <div class="column container is-centered is-12 p-0 card">
+                        <div class="card-header has-background-danger-dark">
+                            <h2 class="card-header-title has-text-white has-text-weight-medium mt-0 ml-0 mr-0 p-2 is-vcentered">
+                                <label for="turma" class="is-vcentered">Turmas:
+                                    <select name="turma" id="turma" class="select is-vcentered"
+                                            onchange="selecionarTurma()">
+                                        <option value="0">Selecione uma turma</option>
+                                        {% for turma in turmas %}
+                                            <option value="{{ turma.id }}" {% if turma_atual.id == turma.id %}
+                                                    selected {% endif %}>{{ turma.turma }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </label>
+                            </h2>
+                        </div>
+                        <div class="card-content p-0 container">
+                            {% if alunos == None %}
+                                <p class="card-header-title is-centered">Nenhum aluno cadastrado</p>
+                            {% else %}
+                                {% if lista_preenchida == True %}
+                                    <p class="card-header-title is-centered">Lista de frequencia para a turma já foi
+                                        enviada</p>
+                                {% else %}
+                                    <form action="/frequencia/{{ turma_atual.id }}" method="post">
+                                        <table class="table is-fullwidth container is-bordered is-hoverable">
+                                            <thead>
+                                            <tr>
+                                                <th class="container">Nome</th>
+                                                <th>Presença</th>
+                                                <th>Falta</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for aluno in alunos %}
+                                                <tr>
+                                                    <td class="container">{{ aluno.nome }}</td>
+                                                    <td class="has-background-success"><label>
+                                                        <input type="radio" class="radio" title="Presença"
+                                                               name="{{ aluno.id }}"
+                                                               id="{{ aluno.id }}" value="1">
+                                                    </label>
+                                                    </td>
+                                                    <td class="has-background-danger">
+                                                        <div class="control">
+                                                            <label for="{{ aluno.id }}">
+                                                                <input type="radio" class="radio" title="Falta"
+                                                                       name="{{ aluno.id }}"
+                                                                       id="{{ aluno.id }}" value="0">
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        <button name="Enviar" class="button is-info is-align-self-flex-end">Enviar
+                                        </button>
+                                    </form>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <script>
+        function selecionarTurma() {
+            let turma = document.getElementById('turma').value;
+            window.location.href = '/frequencia/' + turma;
+        }
+    </script>
+{% endblock %}
