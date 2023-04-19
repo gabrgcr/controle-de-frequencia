@@ -1,6 +1,6 @@
 # coding: utf-8
 from flask_login import UserMixin
-from sqlalchemy import Column, ForeignKey, ForeignKeyConstraint, Index, Integer, String, TIMESTAMP, text
+from sqlalchemy import Column, ForeignKey, ForeignKeyConstraint, Index, Integer, String, TIMESTAMP, text, false, Boolean
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.mysql import TINYINT
 from sqlalchemy.ext.declarative import declarative_base
@@ -80,7 +80,7 @@ class Alerta(Base):
 
     fk_dia_letivo = Column(ForeignKey('dia_letivo.id'), primary_key=True, nullable=False)
     fk_aluno = Column(ForeignKey('aluno.id'), primary_key=True, nullable=False)
-    feito_aviso = Column(TINYINT, nullable=False, server_default=text("'0'"))
+    feito_aviso = Column(Boolean, nullable=False, server_default=false())
     fk_usuario_aviso = Column(ForeignKey('usuario.username'), index=True)
 
     usuario = relationship('Usuario')

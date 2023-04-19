@@ -1,5 +1,7 @@
 import datetime
 
+from sqlalchemy import true
+
 from database import session
 from models import *
 
@@ -52,7 +54,7 @@ def create_dia_letivo(dia: int, mes: int, ano: int):
         session.rollback()
 
 
-def create_lista_presenca(fk_aluno: int, fk_dia_letivo: int, presente: int, fk_usuario: str):
+def create_lista_presenca(fk_aluno: int, fk_dia_letivo: int, presente: bool, fk_usuario: str):
     lista_presenca = ListaPresenca(fk_aluno=fk_aluno, fk_dia_letivo=fk_dia_letivo, presente=presente,
                                    fk_usuario=fk_usuario)
     try:
@@ -67,7 +69,7 @@ def get_all_turmas():
 
 
 def get_all_turmas_vigentes():
-    return session.query(Turma).filter(Turma.ano_letivo == datetime.datetime.now().year).all()
+    return session.query(Turma).filter(Turma.ano_letivo == str(datetime.datetime.now().year)).all()
 
 
 def get_all_alunos():
@@ -96,7 +98,7 @@ def delete_turma(turma: Turma):
 
 def check_alerta_by_id(fk_aluno: int, fk_dia_letivo: int):
     alerta = session.query(Alerta).filter(Alerta.fk_aluno == fk_aluno and Alerta.fk_dia_letivo == fk_dia_letivo).update(
-        {Alerta.feito_aviso: 1})
+        {Alerta.feito_aviso: true()})
     session.commit()
     return alerta
 

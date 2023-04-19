@@ -12,6 +12,9 @@ login_manager.login_view = 'login'
 login_manager.init_app(app)
 
 
+# z9cr7NBvKwHZIqW3
+
+
 @app.route('/', methods=['GET', 'POST'])
 def login():  # put application's code here
     if request.method == 'POST':
@@ -122,12 +125,12 @@ def frequencia(id: int):
     if request.method == 'POST':
         if len(alunos) != 0:
             for aluno in alunos:
-                presente = request.form[str(aluno.id)]
+                presente = request.form[str(aluno.id)] == '1'
                 repo.create_lista_presenca(fk_aluno=aluno.id,
                                            fk_dia_letivo=repo.get_dia_letivo_atual().id,
-                                           presente=int(presente),
+                                           presente=presente,
                                            fk_usuario=current_user.username)
-                if presente == '0':
+                if not presente:
                     repo.create_alerta(fk_aluno=aluno.id,
                                        fk_dia_letivo=repo.get_dia_letivo_atual().id,
                                        fk_usuario_aviso=current_user.username)
