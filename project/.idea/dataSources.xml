@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mysql://localhost:3306/controle_de_frequencia_db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="Supabase" uuid="a6e3e33d-90ef-4f28-a670-3ebdaf383a77">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://db.wcxbroydbesbruzopdzr.supabase.co:6543/postgres</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

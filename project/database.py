@@ -1,6 +1,10 @@
+import os
+
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-engine = create_engine("postgresql://postgres:z9cr7NBvKwHZIqW3@db.wcxbroydbesbruzopdzr.supabase.co:6543/postgres")
+url = os.environ['DATABASE_URL']
+
+engine = create_engine("postgresql://" + url)
 Session = sessionmaker(bind=engine)
 session = Session()
