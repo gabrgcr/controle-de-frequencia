@@ -21,10 +21,10 @@ Por fim, deve ser rodado o arquivo app.py do projeto, com a variável de ambient
 
 Seguem prints de algumas telas da aplicação para referência:
 
-[!Criação de Turmas](https://imgur.com/TAkvRLN)
+![Criação de Turmas](https://imgur.com/TAkvRLN)
 
-[!Iniciar Dia Letivo](https://imgur.com/VCa0F2e)
+![Iniciar Dia Letivo](https://imgur.com/VCa0F2e)
 
-[!Lista de Frequência](https://imgur.com/zvROXIA)
+![Lista de Frequência](https://imgur.com/zvROXIA)
 
-[!Avisos de Ausência](https://imgur.com/IcLcC2q)
+![Avisos de Ausência](https://imgur.com/IcLcC2q)
