@@ -186,5 +186,5 @@ def load_user(user_id):
     return repo.get_users_by_username(user_id)
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
