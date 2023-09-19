@@ -5,6 +5,6 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 
 url = os.environ['POSTGRES_URL']
 
-engine = create_engine("postgresql://" + url)
+engine = create_engine(url)
 Session = sessionmaker(bind=engine)
 session = Session()
