@@ -32,7 +32,7 @@ jobs:
     - name: Test with pytest
       run: |
         export POSTGRES_URL=${{ secrets.POSTGRES_URL }}
-        pytest --no-header --no-summary
+        pytest
     - name: Deploy to Vercel
       uses: amondnet/vercel-action@v25
       with:
