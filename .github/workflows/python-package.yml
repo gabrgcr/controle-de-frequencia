@@ -27,9 +27,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        cd..
-        find . -regex '.*requirements.txt$'
-        pip install -r requirements.txt
+    - name: Install Python dependencies
+      uses: py-actions/py-dependency-install@v4
     - name: Test with pytest
       run: |
         export POSTGRES_URL=${{ secrets.POSTGRES_URL }}
