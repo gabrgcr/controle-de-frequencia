@@ -37,6 +37,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
+        export POSTGRES_URL=${{ secrets.POSTGRES_URL }}
         pytest
     - name: Deploy to Vercel
       uses: amondnet/vercel-action@v25
