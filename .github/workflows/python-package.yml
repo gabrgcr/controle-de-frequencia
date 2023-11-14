@@ -29,6 +29,8 @@ jobs:
         python -m pip install --upgrade pip
     - name: Install Python dependencies
       uses: py-actions/py-dependency-install@v4
+      with:
+        path: "project/requirements.txt"
     - name: Test with pytest
       run: |
         export POSTGRES_URL=${{ secrets.POSTGRES_URL }}
