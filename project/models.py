@@ -1,9 +1,9 @@
 # coding: utf-8
 from flask_login import UserMixin
 from sqlalchemy import Column, ForeignKey, ForeignKeyConstraint, Index, Integer, String, TIMESTAMP, text, false, Boolean
-from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.mysql import TINYINT
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 

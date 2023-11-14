@@ -1,7 +1,7 @@
 import os
 
-from sqlalchemy import create_engine, MetaData
-from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 url = os.environ['POSTGRES_URL']
 
