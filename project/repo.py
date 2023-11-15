@@ -65,15 +65,17 @@ def create_lista_presenca(fk_aluno: int, fk_dia_letivo: int, presente: bool, fk_
 
 
 def get_all_turmas():
-    return session.query(Turma).all()
+    return session.query(Turma).order_by(Turma.turma).all()
 
 
 def get_all_turmas_vigentes():
-    return session.query(Turma).filter(Turma.ano_letivo == str(datetime.datetime.now().year)).all()
+    return session.query(Turma).filter(Turma.ano_letivo == str(datetime.datetime.now().year)).order_by(Turma.turma).all()
 
 
 def get_all_alunos():
-    return session.query(Aluno).order_by(Aluno.fk_turma.asc(), Aluno.nome.asc()).all()
+    alunos = session.query(Aluno).order_by(Aluno.fk_turma.asc(), Aluno.nome.asc()).all()
+    alunos.sort(key=lambda x: x.turma.turma)
+    return alunos
 
 
 def get_all_alertas():
