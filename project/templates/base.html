@@ -5,13 +5,74 @@
     <title>Controle de Frequencia {% block title %} {% endblock %}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <script src="https://kit.fontawesome.com/09a6fa3f09.js" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+            if ($navbarBurgers.length > 0) {
+                $navbarBurgers.forEach(el => {
+                    el.addEventListener('click', () => {
+                        const target = el.dataset.target;
+                        const $target = document.getElementById(target);
+                        const $nav = document.getElementById('nav');
+                        $nav.classList.toggle('is-hidden');
+                        el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
+                    });
+                });
+            }
+        });
+    </script>
 </head>
 <body>
 <header class="has-background-success p-5">
-    <h1 class="title">Controle de Frequência</h1>
+    <div class="columns is-flex is-align-content-flex-start">
+        <div class="column is-one-fifth-touch is-hidden-desktop">
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+               data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="column is-four-fifths-touch is-align-self-flex-start">
+            <h1 class="title">Controle de Frequência</h1>
+        </div>
+    </div>
 </header>
+<nav id="nav" class="is-hidden-desktop navbar m-1 card is-hidden" role="navigation">
+    <div class="navbar-start">
+        <a class="navbar-item" href="/alerta">Avisos</a>
+    </div>
+    <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">Cadastros</a>
+        <div class="navbar-dropdown">
+            <a href="/alunos" class="navbar-item">Alunos</a>
+            <a href="/turma" class="navbar-item">Turmas</a>
+        </div>
+    </div>
+    <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">Frequência</a>
+        <div class="navbar-dropdown">
+            <a href="/frequencia/0" class="navbar-item">Frequência</a>
+            <a href="/historico/0/0" class="navbar-item">Histórico de Frequência</a>
+        </div>
+    </div>
+    {% if current_user.tipo_usuario == 'ADM' %}
+        <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">Administração</a>
+            <div class="navbar-dropdown">
+                <a href="/usuarios" class="navbar-item">Usuários</a>
+            </div>
+        </div>
+    {% endif %}
+    <div class="navbar-end">
+        <form action="/logout">
+            <button class="button is-danger mb-2 ml-1">Logout</button>
+        </form>
+    </div>
+</nav>
 <div class="columns is-fullheight is-flex-grow p-0 m-0 is-flex" style="min-height: 100vh">
-    <div class="column is-one-fifth has-background-grey-lighter">
+    <div class="column is-one-fifth has-background-grey-lighter is-hidden-touch">
         <aside class="menu m-3">
             <p class="menu-label">
                 Geral
